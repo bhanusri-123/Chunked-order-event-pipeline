@@ -1,0 +1,11 @@
+# 1) memory vs input size (fixed chunk_size=10000): peak should stay ~flat
+{"rows": 50000, "file_mb": 3.6, "chunk_size": 10000, "status": "success", "elapsed_s": 1.555, "rows_per_s": 32147, "peak_python_mb": 11.1, "read_s": 0.16, "validate_s": 0.669, "write_s": 0.713}
+{"rows": 200000, "file_mb": 14.4, "chunk_size": 10000, "status": "success", "elapsed_s": 7.314, "rows_per_s": 27344, "peak_python_mb": 11.7, "read_s": 0.64, "validate_s": 2.684, "write_s": 3.961}
+# 2) chunk-size sweep on the smallest dataset: throughput vs memory trade-off
+{"rows": 50000, "file_mb": 3.6, "chunk_size": 1000, "status": "success", "elapsed_s": 2.825, "rows_per_s": 17702, "peak_python_mb": 2.1, "read_s": 0.21, "validate_s": 1.608, "write_s": 0.995}
+{"rows": 50000, "file_mb": 3.6, "chunk_size": 5000, "status": "success", "elapsed_s": 1.581, "rows_per_s": 31623, "peak_python_mb": 5.8, "read_s": 0.151, "validate_s": 0.721, "write_s": 0.696}
+{"rows": 50000, "file_mb": 3.6, "chunk_size": 20000, "status": "success", "elapsed_s": 1.559, "rows_per_s": 32069, "peak_python_mb": 21.7, "read_s": 0.117, "validate_s": 0.72, "write_s": 0.708}
+{"rows": 50000, "file_mb": 3.6, "chunk_size": 100000, "status": "success", "elapsed_s": 1.605, "rows_per_s": 31149, "peak_python_mb": 45.4, "read_s": 0.131, "validate_s": 0.629, "write_s": 0.83}
+# 3) process peak RSS (fresh interpreter per run, chunk_size=10000); interpreter+pandas baseline is ~constant
+{"rows": 50000, "file_mb": 3.6, "peak_rss_mb": 185.3}
+{"rows": 200000, "file_mb": 14.4, "peak_rss_mb": 185.3}

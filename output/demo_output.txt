@@ -1,0 +1,42 @@
+== 1. starter sample (200 rows, CSV) ==
+2026-11-01 15:40:37,982 INFO pipeline run_start run_id=run_20261101T154037_1716d73e source=orders.csv chunk_size=50
+2026-11-01 15:40:38,078 INFO pipeline run_end {"run_id": "run_20261101T154037_1716d73e", "source_file": "orders.csv", "source_sha256": "822e4d286d0c4f4b19c282246532136cfa004f59a5496b078565f248bfbbd437", "source_format": "csv", "status": "success", "failure_reason": null, "started_at": "2026-11-01T15:40:37.981847Z", "elapsed_s": 0.097, "rows_per_s": 2069, "timings_s": {"read_s": 0.008, "validate_s": 0.073, "write_s": 0.012}, "notes": [], "rows_in": 200, "rows_valid": 190, "rows_rejected": 10, "rows_duplicate": 7, "rows_new_events": 183, "rows_state_changes": 116, "chunks_committed": 4}
+[PASS] per-run identity: rows_in = rejected + duplicate + new_events -- 1 runs checked, 0 violations
+[PASS] history rows = sum(run_log.rows_new_events) -- events=183, logged=183
+[PASS] current-state lines = distinct (order_id, line_no) in history -- order_lines=63, distinct_in_history=63
+[PASS] current state = latest event per line (late data never wins) -- 0 mismatches
+[PASS] referential integrity (customers, products, FK check) -- orphan_customers=0, orphan_products=0, fk_violations=0
+[PASS] derived field line_total_cents = quantity * unit_price_cents -- 0 violations
+[PASS] key aggregate: sum(line_total_cents) current state = latest-in-history -- state=7806330, history_latest=7806330
+[PASS] run finished with status=success -- status=success
+[PASS] rows_in = generator total_rows -- 200 vs 200
+[PASS] rejected count matches labels -- 10 vs 10
+[PASS] duplicate count matches -- 7 vs 7
+[PASS] new events match -- 183 vs 183
+[PASS] every reject traced to the labelled (line, reason) -- got=10, labelled=10, missing=0, unexpected=0
+[PASS] current-state line count matches -- 63 vs 63
+[PASS] current-state revenue by status matches -- statuses compared=6
+
+== 2. larger run (100,000 rows, CSV, chunk_size=10,000) ==
+{'status': 'success', 'rows_in': 100000, 'rows_rejected': 2855, 'rows_duplicate': 1934, 'rows_new_events': 95211, 'chunks_committed': 10, 'elapsed_s': 2.995, 'rows_per_s': 33384, 'timings_s': {'read_s': 0.279, 'validate_s': 1.237, 'write_s': 1.459}}
+
+== 3. rerun the SAME file: skipped; then forced reprocess: no duplicates ==
+rerun   -> skipped ['identical file (sha256) already loaded successfully; use force to reprocess']
+forced  -> success new_events=0 duplicates=97145
+
+== 4. reconciliation (internal checks after 3 runs; ground-truth check on the first run) ==
+[PASS] per-run identity: rows_in = rejected + duplicate + new_events -- 2 runs checked, 0 violations
+[PASS] history rows = sum(run_log.rows_new_events) -- events=95211, logged=95211
+[PASS] current-state lines = distinct (order_id, line_no) in history -- order_lines=31202, distinct_in_history=31202
+[PASS] current state = latest event per line (late data never wins) -- 0 mismatches
+[PASS] referential integrity (customers, products, FK check) -- orphan_customers=0, orphan_products=0, fk_violations=0
+[PASS] derived field line_total_cents = quantity * unit_price_cents -- 0 violations
+[PASS] key aggregate: sum(line_total_cents) current state = latest-in-history -- state=12519737160, history_latest=12519737160
+[PASS] run finished with status=success -- status=success
+[PASS] rows_in = generator total_rows -- 100000 vs 100000
+[PASS] rejected count matches labels -- 2855 vs 2855
+[PASS] duplicate count matches -- 1934 vs 1934
+[PASS] new events match -- 95211 vs 95211
+[PASS] every reject traced to the labelled (line, reason) -- got=2855, labelled=2855, missing=0, unexpected=0
+[PASS] current-state line count matches -- 31202 vs 31202
+[PASS] current-state revenue by status matches -- statuses compared=6

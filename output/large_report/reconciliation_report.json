@@ -1,0 +1,80 @@
+{
+  "all_passed": true,
+  "checks": [
+    {
+      "name": "per-run identity: rows_in = rejected + duplicate + new_events",
+      "passed": true,
+      "detail": "2 runs checked, 0 violations"
+    },
+    {
+      "name": "history rows = sum(run_log.rows_new_events)",
+      "passed": true,
+      "detail": "events=95211, logged=95211"
+    },
+    {
+      "name": "current-state lines = distinct (order_id, line_no) in history",
+      "passed": true,
+      "detail": "order_lines=31202, distinct_in_history=31202"
+    },
+    {
+      "name": "current state = latest event per line (late data never wins)",
+      "passed": true,
+      "detail": "0 mismatches"
+    },
+    {
+      "name": "referential integrity (customers, products, FK check)",
+      "passed": true,
+      "detail": "orphan_customers=0, orphan_products=0, fk_violations=0"
+    },
+    {
+      "name": "derived field line_total_cents = quantity * unit_price_cents",
+      "passed": true,
+      "detail": "0 violations"
+    },
+    {
+      "name": "key aggregate: sum(line_total_cents) current state = latest-in-history",
+      "passed": true,
+      "detail": "state=12519737160, history_latest=12519737160"
+    },
+    {
+      "name": "run finished with status=success",
+      "passed": true,
+      "detail": "status=success"
+    },
+    {
+      "name": "rows_in = generator total_rows",
+      "passed": true,
+      "detail": "100000 vs 100000"
+    },
+    {
+      "name": "rejected count matches labels",
+      "passed": true,
+      "detail": "2855 vs 2855"
+    },
+    {
+      "name": "duplicate count matches",
+      "passed": true,
+      "detail": "1934 vs 1934"
+    },
+    {
+      "name": "new events match",
+      "passed": true,
+      "detail": "95211 vs 95211"
+    },
+    {
+      "name": "every reject traced to the labelled (line, reason)",
+      "passed": true,
+      "detail": "got=2855, labelled=2855, missing=0, unexpected=0"
+    },
+    {
+      "name": "current-state line count matches",
+      "passed": true,
+      "detail": "31202 vs 31202"
+    },
+    {
+      "name": "current-state revenue by status matches",
+      "passed": true,
+      "detail": "statuses compared=6"
+    }
+  ]
+}

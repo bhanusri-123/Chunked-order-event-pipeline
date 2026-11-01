@@ -1,0 +1,34 @@
+{
+  "expected_current_lines": 63,
+  "expected_current_rows_by_status": {
+    "cancelled": 1,
+    "created": 16,
+    "delivered": 26,
+    "paid": 7,
+    "returned": 4,
+    "shipped": 9
+  },
+  "expected_current_sum_cents_by_status": {
+    "cancelled": 211908,
+    "created": 1548998,
+    "delivered": 3103899,
+    "paid": 962852,
+    "returned": 511903,
+    "shipped": 1466770
+  },
+  "expected_duplicates": 7,
+  "expected_new_events": 183,
+  "expected_rejected_total": 10,
+  "expected_rejects_by_reason": {
+    "INVALID_FORMAT": 2,
+    "INVALID_REFERENCE_CUSTOMER": 3,
+    "INVALID_REFERENCE_PRODUCT": 1,
+    "INVALID_STATUS": 1,
+    "MALFORMED_RECORD": 1,
+    "MISSING_REQUIRED_FIELD": 1,
+    "OUT_OF_RANGE": 1
+  },
+  "format": "csv",
+  "seed": 7,
+  "total_rows": 200
+}

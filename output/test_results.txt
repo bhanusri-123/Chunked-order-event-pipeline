@@ -1,0 +1,32 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-9.2.0, pluggy-1.7.0 -- /usr/bin/python3
+cachedir: .pytest_cache
+rootdir: /home/claude/chunked_pipeline
+collecting ... collected 24 items
+
+tests/test_pipeline.py::test_happy_path_csv PASSED                       [  4%]
+tests/test_pipeline.py::test_happy_path_jsonl_with_native_types PASSED   [  8%]
+tests/test_pipeline.py::test_chunking_bounds_rows_per_chunk PASSED       [ 12%]
+tests/test_pipeline.py::test_empty_inputs_are_successful_noops PASSED    [ 16%]
+tests/test_pipeline.py::test_malformed_csv_row_kept_with_correct_line_number PASSED [ 20%]
+tests/test_pipeline.py::test_malformed_json_lines PASSED                 [ 25%]
+tests/test_pipeline.py::test_missing_required_fields_and_nulls PASSED    [ 29%]
+tests/test_pipeline.py::test_json_null_is_missing PASSED                 [ 33%]
+tests/test_pipeline.py::test_duplicates_within_and_across_chunks PASSED  [ 37%]
+tests/test_pipeline.py::test_same_timestamp_instant_in_different_offsets_is_a_duplicate PASSED [ 41%]
+tests/test_pipeline.py::test_rerun_same_input_is_idempotent PASSED       [ 45%]
+tests/test_pipeline.py::test_missing_column_fails_fast_and_loads_nothing PASSED [ 50%]
+tests/test_pipeline.py::test_extra_column_is_ignored_with_note PASSED    [ 54%]
+tests/test_pipeline.py::test_renamed_column_and_json_array_and_bad_extension_fail PASSED [ 58%]
+tests/test_pipeline.py::test_empty_reference_tables_fail_clearly PASSED  [ 62%]
+tests/test_pipeline.py::test_invalid_reference_keys_rejected_not_loaded PASSED [ 66%]
+tests/test_pipeline.py::test_late_arriving_event_never_overwrites_newer_state PASSED [ 70%]
+tests/test_pipeline.py::test_out_of_order_and_tie_break_are_deterministic PASSED [ 75%]
+tests/test_pipeline.py::test_boundary_values_and_derived_total PASSED    [ 79%]
+tests/test_pipeline.py::test_status_is_case_and_whitespace_normalised PASSED [ 83%]
+tests/test_pipeline.py::test_partial_failure_rolls_back_chunk_then_retry_recovers PASSED [ 87%]
+tests/test_pipeline.py::test_end_to_end_against_generator_ground_truth[csv] PASSED [ 91%]
+tests/test_pipeline.py::test_end_to_end_against_generator_ground_truth[jsonl] PASSED [ 95%]
+tests/test_pipeline.py::test_generator_is_deterministic_and_labels_are_separate PASSED [100%]
+
+============================== 24 passed in 1.93s ==============================
